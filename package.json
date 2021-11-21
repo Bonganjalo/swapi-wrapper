@@ -1,0 +1,30 @@
+{
+  "name": "swapi-wrapper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec 'ts-node' index.ts localhost 4000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bonganjalo/swapi-wrapper.git"
+  },
+  "author": "Bonganjalo Hadebe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bonganjalo/swapi-wrapper/issues"
+  },
+  "homepage": "https://github.com/Bonganjalo/swapi-wrapper#readme",
+
+  "dependencies": {
+    "apollo-server": "^3.3.0",
+    "graphql": "^15.5.3",
+    "typescript": "4.5.2",
+    "ts-node": "10.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "1.18.4"
+  }
+}
