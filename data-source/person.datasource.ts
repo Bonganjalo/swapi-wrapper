@@ -1,5 +1,5 @@
 import { RESTDataSource } from "apollo-datasource-rest";
-
+const got = require("got");
 interface PersonType {
   name: string;
   height: string;
@@ -16,24 +16,39 @@ export class Person extends RESTDataSource {
 
   async findAll() {
     const swapiResponse = await this.get("people");
-    return Array.isArray(swapiResponse.results)
-      ? swapiResponse.results.map((person) => this.toPerson(person))
-      : [];
+
+    if (Array.isArray(swapiResponse.results)) {
+      swapiResponse.results = swapiResponse.results.map((person) =>
+        this.toPerson(person)
+      );
+      return swapiResponse;
+    }
+    return [];
   }
 
-  async fibdAllByPage({ pageNumber }: { pageNumber: number }) {
-    const swapiResponse = await this.get("people/", { page: pageNumber });
-    return Array.isArray(swapiResponse.results)
-      ? swapiResponse.results.map((person) => this.toPerson(person))
-      : [];
+  async findAllByPage({ page }) {
+    const swapiResponse = await this.get("people/", { page });
+
+    if (Array.isArray(swapiResponse.results)) {
+      swapiResponse.results = swapiResponse.results.map((person) =>
+        this.toPerson(person)
+      );
+      return swapiResponse;
+    }
+    return [];
   }
 
   async findByName({ name }: { name: string }) {
     const swapiResponse = await this.get("people/", { search: name });
-    return Array.isArray(swapiResponse.results)
-      ? swapiResponse.results.map((person) => this.toPerson(person))
-      : [];
+    if (Array.isArray(swapiResponse.results)) {
+      swapiResponse.results = swapiResponse.results.map((person) =>
+        this.toPerson(person)
+      );
+      return swapiResponse;
+    }
+    return [];
   }
+
   toPerson(person: any): PersonType {
     return {
       name: person.name,
