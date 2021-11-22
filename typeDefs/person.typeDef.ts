@@ -8,10 +8,18 @@ export const typeDefs = gql`
     gender: String
     homeworld: String
   }
+
+  type FindResults {
+    count: Int
+    next: String
+    previous: String
+    results: [Person]
+  }
+
   type Query {
-    findAll: [Person]!
-    findAllByPage(page: Int): [Person]!
-    findByName(name: String): [Person]!
+    findAll: FindResults!
+    findAllByPage(page: Int): FindResults!
+    findByName(name: String): FindResults!
     health: String
   }
 `;
